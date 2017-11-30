@@ -1,9 +1,10 @@
 package wx.euler.util.reflection;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import org.junit.Test;
+
+import wx.euler.util.entity.Persion;
 
 public class ReflectionUtilTest {
 
@@ -22,7 +23,7 @@ public class ReflectionUtilTest {
 	@Test
 	public void testInvokeStringStringObjectArray() {
 		try {
-			Object invoke = ReflectionUtil.invoke("java.lang.System", "getProperty", "user.dir");
+			Object invoke = ReflectionUtil.invoke("wx.euler.util.entity.Persion", "calculate", 1,2);
 			System.out.println(invoke);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
@@ -30,13 +31,17 @@ public class ReflectionUtilTest {
 			e.printStackTrace();
 		}
 	}
+	
 	@Test
-	public void test() throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> forName = Class.forName("java.lang.Math");
-		Method method = forName.getMethod("cos", double.class);
-		
-		Object invoke = method.invoke(null, 2);
-		System.out.println(invoke);
+	public void testSetValue() throws IllegalArgumentException, IllegalAccessException {
+		Persion persion = new Persion();
+		ReflectionUtil.setValue(persion, "name", "老王");
+		System.out.println(persion);
 	}
 
+	@Test
+	public void testGetSuperClassGenricType() {
+		Class<?> class1 = ReflectionUtil.getSuperClassGenricType(Persion.class, 0);
+		System.out.println(class1);
+	}
 }

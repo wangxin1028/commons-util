@@ -1,10 +1,56 @@
 package wx.euler.util.reflection;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public class ReflectionUtil {
+	public static Class<?> getSuperClassGenricType(Class<?> clazz,int index) {
+		Type type = clazz.getGenericSuperclass();
+		if(type instanceof ParameterizedType) {
+			ParameterizedType parameterizedType = (ParameterizedType) type;
+			Type[] types = parameterizedType.getActualTypeArguments();
+			if(types==null || types.length<=index) {
+				return null;
+			}else {
+				return (Class<?>)types[index];
+			}
+		}else {
+			return null;
+		}
+	}
+	/**
+	 * 给指定的对象的指定的属性设置指定的值
+	 * @param target
+	 * @param fieldName
+	 * @param parm
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static void setValue(Object target,String fieldName,Object parm) throws IllegalArgumentException, IllegalAccessException {
+		Class<? extends Object> clazz = target.getClass();
+		Field field = getField(clazz, fieldName);
+		field.setAccessible(true);
+		field.set(target, parm);
+	}
+	/**
+	 * 获取一个Class中的指定Field
+	 * @param clazz
+	 * @param fieldName
+	 * @return
+	 */
+	private static Field getField(Class<?> clazz,String fieldName) {
+		Field field = null;
+		for(;clazz!=null;clazz = clazz.getSuperclass()) {
+			try {
+				field = clazz.getDeclaredField(fieldName);
+			} catch (Exception e) {}
+		}
+		return field;
+	}
 	/**
 	 * 参数不支持基本数据类型
 	 * @param target
@@ -34,6 +80,7 @@ public class ReflectionUtil {
 		}
 		return argsClazz;
 	}
+
 	@SuppressWarnings("unused")
 	private static Method getMethod(Class<?> clazz,String methodName,Class<?> ...args ) {
 		Method method = null;
