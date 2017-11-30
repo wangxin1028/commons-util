@@ -44,4 +44,5 @@ public class ReflectionUtilTest {
 		Class<?> class1 = ReflectionUtil.getSuperClassGenricType(Persion.class, 0);
 		System.out.println(class1);
 	}
+
 }
