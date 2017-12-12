@@ -8,6 +8,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class ReflectionUtil {
+	/**
+	 * 获取给定的类的父类的泛型
+	 * @param clazz
+	 * @param index
+	 * @return
+	 */
 	public static Class<?> getSuperClassGenricType(Class<?> clazz,int index) {
 		Type type = clazz.getGenericSuperclass();
 		if(type instanceof ParameterizedType) {
