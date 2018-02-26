@@ -1,4 +1,4 @@
-package wx.euler.util.entity;
+package commons.util.entity;
 
 public class Animal<T> {
 	

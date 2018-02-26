@@ -1,4 +1,4 @@
-package wx.euler.util.reflection;
+package commons.util.reflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

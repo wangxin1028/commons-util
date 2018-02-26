@@ -1,10 +1,11 @@
-package wx.euler.util.reflection;
+package commons.util.reflection;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Test;
 
-import wx.euler.util.entity.Persion;
+import commons.util.entity.Persion;
+import commons.util.reflection.ReflectionUtil;
 
 public class ReflectionUtilTest {
 

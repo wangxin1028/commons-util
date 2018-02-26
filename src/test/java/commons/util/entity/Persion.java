@@ -1,4 +1,4 @@
-package wx.euler.util.entity;
+package commons.util.entity;
 
 public class Persion extends Animal<String>{
 	private String name;
