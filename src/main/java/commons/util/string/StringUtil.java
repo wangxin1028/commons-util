@@ -8,6 +8,7 @@ public class StringUtil {
 	private static Pattern yearPattern = Pattern.compile("\\d{2,4}[ ]*款");
 	/**
 	 * 将车款年份转化为年
+	 *
 	 * @param result
 	 * @return
 	 */
